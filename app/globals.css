@@ -1,49 +1,96 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream:      #F5F0E8;
+  --navy:       #1C2B4A;
+  --gold:       #B8960C;
+  --warm-gray:  #9A9186;
+  --surface:    #EDE8DE;
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-body:    var(--font-lora), Georgia, serif;
+  --font-mono:    var(--font-ibm), 'Courier New', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.375rem; }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
+p { margin-bottom: 1rem; }
+a { color: var(--navy); text-decoration-color: var(--gold); }
+a:hover { color: var(--gold); }
+
+code, .mono { font-family: var(--font-mono); font-size: 0.85em; }
+
+table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+th { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
+     letter-spacing: 0.05em; padding: 0.5rem; border-bottom: 2px solid var(--navy);
+     text-align: left; }
+td { padding: 0.5rem; border-bottom: 1px solid var(--warm-gray); font-size: 0.9rem; }
+
+details { margin: 1rem 0; }
+summary { cursor: pointer; font-weight: 600; font-family: var(--font-display);
+          padding: 0.5rem 0; color: var(--navy); }
+summary:hover { color: var(--gold); }
+
+.app-shell { display: flex; min-height: 100vh; }
+.main-content { flex: 1; margin-left: 220px; padding: 2.5rem 3rem; max-width: 980px; }
+
+/* Sidebar */
+.sidebar { position: fixed; top: 0; left: 0; width: 220px; height: 100vh;
+           background: var(--navy); color: var(--cream); display: flex;
+           flex-direction: column; padding: 2rem 1.25rem; z-index: 10; }
+.sidebar-brand { font-family: var(--font-display); font-size: 1.1rem;
+                 letter-spacing: 0.1em; text-transform: uppercase;
+                 color: var(--cream); margin-bottom: 2rem; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 0.125rem; flex: 1; }
+.sidebar-link { color: var(--warm-gray); text-decoration: none; font-size: 0.8rem;
+                padding: 0.375rem 0.625rem; border-radius: 3px;
+                transition: color 0.15s, background 0.15s; }
+.sidebar-link:hover { color: var(--cream); }
+.sidebar-link.active { color: var(--gold); background: rgba(184,150,12,0.12); }
+.sidebar-footer { margin-top: auto; padding-top: 1.25rem;
+                  border-top: 1px solid rgba(154,145,134,0.25); }
+.virchow-quote { font-family: var(--font-display); font-style: italic;
+                 font-size: 0.65rem; color: var(--warm-gray); line-height: 1.55;
+                 border: none; padding: 0; }
+.virchow-quote cite { display: block; margin-top: 0.4rem; font-style: normal;
+                      font-size: 0.6rem; color: rgba(154,145,134,0.6); }
+
+/* Login */
+.login-page { min-height: 100vh; background: var(--navy); display: flex;
+              flex-direction: column; align-items: center; justify-content: center;
+              gap: 2rem; padding: 2rem; }
+.login-title { font-family: var(--font-display); font-size: 2rem; color: var(--cream);
+               letter-spacing: 0.08em; text-transform: uppercase; }
+.login-quote { font-family: var(--font-display); font-style: italic;
+               font-size: 0.85rem; color: var(--warm-gray); text-align: center;
+               max-width: 420px; line-height: 1.6; border: none; padding: 0; }
+.login-quote cite { display: block; margin-top: 0.5rem; font-style: normal;
+                    font-size: 0.75rem; }
+.login-form { display: flex; flex-direction: column; gap: 1rem; width: 280px; }
+.login-input { padding: 0.75rem 1rem; background: rgba(255,255,255,0.06);
+               border: 1px solid rgba(154,145,134,0.4); color: var(--cream);
+               font-family: var(--font-mono); font-size: 0.9rem; border-radius: 3px;
+               outline: none; }
+.login-input:focus { border-color: var(--gold); }
+.login-btn { padding: 0.75rem; background: var(--gold); color: var(--navy);
+             font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+             border: none; border-radius: 3px; cursor: pointer;
+             letter-spacing: 0.05em; }
+.login-btn:hover { opacity: 0.9; }
+.login-error { color: #e07070; font-size: 0.8rem; font-family: var(--font-mono); }
