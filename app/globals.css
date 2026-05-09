@@ -116,3 +116,17 @@ summary:hover { color: var(--gold); }
                text-decoration: none; color: var(--warm-gray); }
 .filter-chip:hover { border-color: var(--navy); color: var(--navy); }
 .filter-chip.active { border-color: var(--gold); color: var(--gold); background: rgba(184,150,12,0.08); }
+
+/* Individual card page */
+.card-page-header { margin-bottom: 2rem; }
+.card-page-stats { display: flex; gap: 1.5rem; font-size: 0.85rem; margin-top: 0.5rem; }
+.card-body { line-height: 1.8; }
+.checkpoint-controls { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--warm-gray); }
+.checkpoint-label { font-size: 0.85rem; color: var(--warm-gray); margin-bottom: 0.75rem; }
+.checkpoint-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.checkpoint-btn { padding: 0.3rem 0.75rem; border: 1px solid var(--warm-gray);
+                  background: transparent; font-family: var(--font-mono); font-size: 0.8rem;
+                  cursor: pointer; border-radius: 3px; color: var(--navy); }
+.checkpoint-btn:hover { border-color: var(--gold); }
+.checkpoint-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.checkpoint-btn:disabled { opacity: 0.5; cursor: not-allowed; }
