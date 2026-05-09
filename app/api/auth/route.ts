@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
-  const { password } = await req.json() as { password: string }
-  if (password !== process.env.SITE_PASSWORD) {
+  let password: string
+  try {
+    const body = await req.json() as { password?: string }
+    password = body.password ?? ''
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
+  }
+
+  if (!password || password !== process.env.SITE_PASSWORD) {
     return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
   }
+
   const response = NextResponse.json({ success: true })
   response.cookies.set('session', process.env.SITE_PASSWORD!, {
     httpOnly: true,
