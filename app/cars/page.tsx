@@ -2,8 +2,8 @@ import { fetchVaultPage } from '@/lib/pages'
 
 export const revalidate = 60
 
-export default async function DashboardPage() {
-  const { title, html } = await fetchVaultPage('topics/mcat-study-guide.md')
+export default async function CarsPage() {
+  const { title, html } = await fetchVaultPage('topics/mcat-cars-hub.md')
   return (
     <div>
       <h1>{title}</h1>
