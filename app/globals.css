@@ -94,3 +94,25 @@ summary:hover { color: var(--gold); }
              letter-spacing: 0.05em; }
 .login-btn:hover { opacity: 0.9; }
 .login-error { color: #e07070; font-size: 0.8rem; font-family: var(--font-mono); }
+
+/* TopicCard grid */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.topic-card { display: block; background: var(--surface); border: 1px solid var(--warm-gray);
+              border-radius: 4px; padding: 1rem; text-decoration: none; color: var(--navy);
+              transition: border-color 0.15s, box-shadow 0.15s; }
+.topic-card:hover { border-color: var(--gold); box-shadow: 0 2px 8px rgba(28,43,74,0.08); }
+.tc-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold);
+               margin-bottom: 0.4rem; }
+.tc-title { font-size: 1rem; margin-bottom: 0.75rem; }
+.tc-meta { display: flex; justify-content: space-between; font-size: 0.75rem;
+           color: var(--warm-gray); margin-bottom: 0.5rem; }
+.tc-bar { height: 3px; background: rgba(154,145,134,0.3); border-radius: 2px; }
+.tc-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; }
+
+/* Filter chips */
+.filter-row { display: flex; gap: 0.5rem; margin: 1rem 0; }
+.filter-chip { padding: 0.3rem 0.75rem; border: 1px solid var(--warm-gray);
+               border-radius: 20px; font-size: 0.8rem; font-family: var(--font-mono);
+               text-decoration: none; color: var(--warm-gray); }
+.filter-chip:hover { border-color: var(--navy); color: var(--navy); }
+.filter-chip.active { border-color: var(--gold); color: var(--gold); background: rgba(184,150,12,0.08); }
