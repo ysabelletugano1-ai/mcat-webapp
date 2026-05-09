@@ -62,7 +62,7 @@ export function parseYankiCard(raw: string): {
 
 export function isDueToday(nextReview: string | undefined): boolean {
   if (!nextReview) return true
-  const today = new Date().toISOString().split('T')[0]
+  const today = new Date().toLocaleDateString('en-CA')
   return nextReview <= today
 }
 
