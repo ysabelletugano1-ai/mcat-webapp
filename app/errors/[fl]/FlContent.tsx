@@ -7,11 +7,13 @@ type Row = { date: string; source: string; qNum: string; category: string; topic
 export default function FlContent({ fl }: { fl: string }) {
   const [rows, setRows] = useState<Row[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     fetch(`/api/fl-entries?fl=${fl}`)
       .then(r => r.json())
       .then(data => { setRows(data.rows); setLoading(false) })
+      .catch(() => { setError(true); setLoading(false) })
   }, [fl])
 
   function handleAdded(row: Row) {
@@ -19,6 +21,7 @@ export default function FlContent({ fl }: { fl: string }) {
   }
 
   if (loading) return <p>Loading…</p>
+  if (error) return <p>Failed to load entries. Please refresh.</p>
 
   return (
     <>

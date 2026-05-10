@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   try {
     const fl = req.nextUrl.searchParams.get('fl')
     if (!fl) return NextResponse.json({ rows: [] })
+    if (!/^[a-z0-9-]+$/.test(fl)) return NextResponse.json({ rows: [] }, { status: 400 })
 
     const path = `practice/full-lengths/${fl}/${fl}-errors.md`
     const { content } = await getFile(path)

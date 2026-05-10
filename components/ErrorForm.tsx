@@ -23,13 +23,17 @@ export default function ErrorForm({ fl, onAdded }: Props) {
     e.preventDefault()
     setSaving(true)
     const entry = { date, source, qNum, category, topic, myAnswer, correct }
-    await fetch('/api/append-error', {
+    const res = await fetch('/api/append-error', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fl, entry }),
     })
-    onAdded(entry)
     setSaving(false)
+    if (!res.ok) {
+      alert('Failed to save entry. Please try again.')
+      return
+    }
+    onAdded(entry)
     setDone(true)
     setQNum(''); setTopic(''); setMyAnswer(''); setCorrect('')
     setTimeout(() => setDone(false), 2000)

@@ -14,6 +14,9 @@ interface ErrorEntry {
 export async function POST(req: NextRequest) {
   try {
     const { fl, entry } = await req.json() as { fl: string; entry: ErrorEntry }
+    if (!fl || !/^[a-z0-9-]+$/.test(fl)) {
+      return NextResponse.json({ error: 'Invalid fl parameter' }, { status: 400 })
+    }
 
     // Find the per-FL file. Convention: practice/full-lengths/{fl}/{fl}-errors.md
     const path = `practice/full-lengths/${fl}/${fl}-errors.md`
@@ -26,6 +29,9 @@ export async function POST(req: NextRequest) {
       /(\|---.*\|)\n/,
       `$1\n${newRow}\n`
     )
+    if (updated === raw) {
+      return NextResponse.json({ error: 'Table separator not found in FL file' }, { status: 500 })
+    }
 
     await updateFile(path, updated, sha, `study: log FL error — ${entry.source} Q${entry.qNum} (${entry.category})`)
 
@@ -36,6 +42,9 @@ export async function POST(req: NextRequest) {
       /(\|---.*\|)\n/,
       `$1\n${newRow}\n`
     )
+    if (masterUpdated === masterRaw) {
+      return NextResponse.json({ error: 'Table separator not found in master log' }, { status: 500 })
+    }
     await updateFile(masterPath, masterUpdated, masterSha, `study: log FL error — ${entry.source} Q${entry.qNum}`)
 
     return NextResponse.json({ ok: true })
