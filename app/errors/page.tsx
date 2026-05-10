@@ -12,8 +12,11 @@ export default async function ErrorsPage() {
 
   // Find per-FL directories by listing the directory
   const allPaths = await getTree('practice/full-lengths/')
-  const flFiles = allPaths.filter(p => p !== 'practice/full-lengths/fl-log.md' && p !== 'practice/full-lengths/_template-fl-errors.md')
-  const flDirs = [...new Set(flFiles.map(p => p.split('/')[2]))]
+  const flDirs = [...new Set(
+    allPaths
+      .filter(p => p.split('/').length >= 4)
+      .map(p => p.split('/')[2])
+  )]
 
   return (
     <div>
@@ -43,8 +46,8 @@ export default async function ErrorsPage() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((r, i) => (
-              <tr key={i}>
+            {rows.map((r) => (
+              <tr key={`${r.date}-${r.source}-${r.qNum}`}>
                 <td className="mono">{r.date}</td>
                 <td>{r.source}</td>
                 <td className="mono">{r.qNum}</td>

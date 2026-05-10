@@ -6,6 +6,7 @@ export default function CategoryChart({ tally }: Props) {
   const entries = Object.entries(tally).sort((a, b) => b[1] - a[1]).slice(0, 10)
   if (!entries.length) return <p className="chart-empty">No errors logged yet.</p>
   const max = entries[0][1]
+  if (max === 0) return <p className="chart-empty">No errors logged yet.</p>
 
   return (
     <div className="chart">
