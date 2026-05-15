@@ -1,5 +1,5 @@
 ---
-title: BP FL 2
+title: BP FL
 date: 
 source: Blueprint
 slug: bp-fl-2
